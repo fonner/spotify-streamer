@@ -35,7 +35,7 @@ public class SearchFragment extends Fragment {
         // Create some dummy data for the ListView.  Here's a sample weekly forecast
         Log.v(LOG_TAG, "In CreateView");
         String[] data = {
-                "Mon 6/23?- Sunny - 31/17",
+                "Mon 6/23 - Sunny - 31/17",
                 "Tue 6/24 - Foggy - 21/8",
                 "Wed 6/25 - Cloudy - 22/17",
                 "Thurs 6/26 - Rainy - 18/11",
