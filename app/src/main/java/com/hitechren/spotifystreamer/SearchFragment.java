@@ -1,6 +1,7 @@
 package com.hitechren.spotifystreamer;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -82,6 +84,22 @@ public class SearchFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.listview_artists);
         listView.setAdapter(mArtistAdapter);
         executeSearch("Elvis");
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Artist artist = mArtistAdapter.getItem(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("artistName", artist.name);
+                bundle.putString("artistID", artist.id);
+                if (artist.images.size() != 0){
+                    bundle.putString("artistImg", artist.images.get(0).url);
+                }
+
+                Intent intent = new Intent(getActivity(), PlaylistActivity.class)
+                        .putExtra("artistBundle", bundle);
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
     public class FetchArtistsTask extends AsyncTask<String, Void, ArtistsPager>{

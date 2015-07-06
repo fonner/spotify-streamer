@@ -35,20 +35,20 @@ public class ArtistAdapter  extends ArrayAdapter<Artist>{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ArtisHolder placeHolder = null;
+        ArtistHolder placeHolder = null;
 
         if(convertView == null){
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             convertView = inflater.inflate(layoutResourceId, parent, false);
 
-            placeHolder = new ArtisHolder();
+            placeHolder = new ArtistHolder();
             placeHolder.imageview_artist = (ImageView)convertView.findViewById(R.id.imageview_artist);
             placeHolder.textview_artist = (TextView)convertView.findViewById(R.id.textview_artist);
 
             convertView.setTag(placeHolder);
 
         } else {
-            placeHolder = (ArtisHolder)convertView.getTag();
+            placeHolder = (ArtistHolder)convertView.getTag();
         }
 
         Artist rowArtist = data.get(position);
@@ -72,7 +72,7 @@ public class ArtistAdapter  extends ArrayAdapter<Artist>{
         return convertView;
     }
 
-    static class ArtisHolder{
+    static class ArtistHolder {
         ImageView imageview_artist;
         TextView textview_artist;
     }
