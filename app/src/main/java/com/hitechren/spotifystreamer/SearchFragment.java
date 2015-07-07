@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +12,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hitechren.spotifystreamer.data.ArtistAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
@@ -65,26 +64,16 @@ public class SearchFragment extends Fragment {
             }
         });
 
-
-        Log.v(LOG_TAG, "In CreateView");
-        Artist[] data = new Artist[7];
-        for (int i=0; i<7; i++){
-            Artist newArt = new Artist();
-            newArt.name = "Atrist " + Integer.toString(i);
-            data[i] = newArt;
-        }
-        ArrayList<Artist> initData = new ArrayList<>(Arrays.asList(data));
-
         mArtistAdapter =
                 new ArtistAdapter(
                         getActivity(), // The current context (this activity)
                         R.layout.list_item_artist, // The name of the layout ID.
                         new ArrayList<Artist>());
 
-        ListView listView = (ListView) rootView.findViewById(R.id.listview_artists);
-        listView.setAdapter(mArtistAdapter);
-        executeSearch("Elvis");
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        GridView GridView = (GridView) rootView.findViewById(R.id.gridview_artists);
+        GridView.setAdapter(mArtistAdapter);
+        //executeSearch("Elvis");
+        GridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Artist artist = mArtistAdapter.getItem(position);
@@ -114,11 +103,14 @@ public class SearchFragment extends Fragment {
 
         @Override
         protected void onPostExecute(ArtistsPager result) {
-            if(result != null){
+            if(result.artists.items.size() != 0){
                 mArtistAdapter.clear();
                 for(int i =0; i < result.artists.items.size(); i++){
                     mArtistAdapter.add(result.artists.items.get(i));
                 }
+            } else {
+                Toast toast = new Toast(getActivity());
+                toast.makeText("Search returned no results. Please Try again.",Toast.LENGTH_SHORT).show();
             }
         }
     }

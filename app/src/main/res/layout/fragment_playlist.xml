@@ -12,8 +12,8 @@
         android:padding="@dimen/activity_vertical_margin"
         android:background="#0000f0">
         <ImageView
-            android:layout_width="128dp"
-            android:layout_height="128dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:src="@drawable/ic_launcher"
             android:id="@+id/imageview_artist"/>
         <TextView
@@ -21,15 +21,14 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:textColor="#ffffff"
-            android:textSize="@dimen/abc_text_size_large_material"
-            android:text="Band Name"
+            android:textSize="24sp"
             android:gravity="center_vertical"
             android:id="@+id/textview_artist"/>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listview_songs"
+        android:id="@+id/listview_tracks"
         android:layout_marginStart="4sp"
         android:layout_marginEnd="4sp"
         android:dividerHeight="4dp">

@@ -2,8 +2,8 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#0000AA</item>
-        <item name="colorPrimaryDark">#0000FF</item>
+        <item name="colorPrimary">#0000FF</item>
+        <item name="colorPrimaryDark">#0000AA</item>
     </style>
 
     <!-- Main activity theme. -->
@@ -17,7 +17,7 @@
 
     <!-- main activity action bar styles -->
     <style name="ActionBar.Solid.SpotifyStreamer" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="displayOptions">useLogo|showHome|showTitle</item>
+        <item name="displayOptions">useLogo|showTitle</item>
         <item name="logo">@drawable/ic_launcher</item>
     </style>
 

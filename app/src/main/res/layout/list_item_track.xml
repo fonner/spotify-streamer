@@ -4,10 +4,10 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="16dp"
         android:id="@+id/imageview_album"
-        android:layout_marginEnd="16dp"
         android:src="@drawable/ic_launcher"/>
     <LinearLayout
         android:layout_width="0dp"
@@ -15,16 +15,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textview_title"
-            android:text="Title"/>
+            android:textStyle="bold"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textview_album"
-            android:text="Album"/>
+            android:id="@+id/textview_album" />
+
     </LinearLayout>
 
 
