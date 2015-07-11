@@ -2,8 +2,7 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#0000FF</item>
-        <item name="colorPrimaryDark">#0000AA</item>
+        <item name="colorPrimary">#84bd00</item>Elvis
     </style>
 
     <!-- Main activity theme. -->

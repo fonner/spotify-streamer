@@ -19,7 +19,7 @@
         android:textSize="@dimen/abc_text_size_medium_material"
         android:textColor="#ffffff"
         android:padding="8dp"
-        android:background="#880000ff"
+        android:background="#cc84bd00"
         android:id="@+id/textview_artist"
         android:layout_gravity="bottom"
         />
