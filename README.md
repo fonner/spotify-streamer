@@ -11,8 +11,17 @@ spotify_icon and ic_launcher from https://en.wikipedia.org/wiki/File:Spotify_Shi
 For ArtistAdapter and PlaylistAdapter's use of setTag and getTag
 http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter
 
-General Assitance
-Udacity's Developing Android Apps course
+###General Assitance
+
+Udacity's "Developing Android Apps" course
 
 Android Developers Guide
 http://developer.android.com/develop/index.html
+
+###Included 3rd Party Modules
+
+Piacasso for Android
+http://square.github.io/picasso/
+
+Spotify Web API for Android
+https://github.com/kaaes/spotify-web-api-android
