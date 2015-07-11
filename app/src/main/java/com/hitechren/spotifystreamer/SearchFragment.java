@@ -1,14 +1,17 @@
 package com.hitechren.spotifystreamer;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -24,10 +27,12 @@ import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
 import kaaes.spotify.webapi.android.models.Artist;
 import kaaes.spotify.webapi.android.models.ArtistsPager;
+import kaaes.spotify.webapi.android.models.Image;
 
 public class SearchFragment extends Fragment {
 
     ArrayAdapter<Artist> mArtistAdapter;
+    String mCurrentSearchItem;
     private static final String LOG_TAG = SearchFragment.class.getSimpleName();
 
 
@@ -37,12 +42,20 @@ public class SearchFragment extends Fragment {
 
     public void executeSearch(String probe){
         FetchArtistsTask artistsTask = new FetchArtistsTask();
+        mCurrentSearchItem = probe;
         artistsTask.execute(probe);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString("searchBox",
+                ((EditText)getActivity().findViewById(R.id.edittext_search_artist)).getText().toString());
+        outState.putString("currentSearch", mCurrentSearchItem);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -55,24 +68,31 @@ public class SearchFragment extends Fragment {
         searchBox.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                boolean handled = true;
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
                     executeSearch(v.getText().toString());
-                    handled = true;
+                    handled = false;
                 }
                 return handled;
             }
         });
 
+        if(savedInstanceState != null){
+            ((EditText) rootView.findViewById(R.id.edittext_search_artist))
+                    .setText(savedInstanceState.getString("searchBox"));
+            executeSearch(savedInstanceState.getString("currentSearch"));
+        }
+
         mArtistAdapter =
-                new ArtistAdapter(
-                        getActivity(), // The current context (this activity)
-                        R.layout.list_item_artist, // The name of the layout ID.
-                        new ArrayList<Artist>());
+            new ArtistAdapter(
+                    getActivity(), // The current context (this activity)
+                    R.layout.list_item_artist, // The name of the layout ID.
+                    new ArrayList<Artist>());
+
 
         GridView GridView = (GridView) rootView.findViewById(R.id.gridview_artists);
         GridView.setAdapter(mArtistAdapter);
-        //executeSearch("Elvis");
+
         GridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -81,6 +101,7 @@ public class SearchFragment extends Fragment {
                 bundle.putString("artistName", artist.name);
                 bundle.putString("artistID", artist.id);
                 if (artist.images.size() != 0){
+
                     bundle.putString("artistImg", artist.images.get(0).url);
                 }
 
@@ -110,7 +131,7 @@ public class SearchFragment extends Fragment {
                 }
             } else {
                 Toast toast = new Toast(getActivity());
-                toast.makeText("Search returned no results. Please Try again.",Toast.LENGTH_SHORT).show();
+                toast.makeText(getActivity(), "Search returned no results.\nPlease Try again.",Toast.LENGTH_SHORT).show();
             }
         }
     }

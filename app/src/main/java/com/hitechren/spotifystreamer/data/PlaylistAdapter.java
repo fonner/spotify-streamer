@@ -49,21 +49,13 @@ public class PlaylistAdapter extends ArrayAdapter<Track> {
         }
 
         Track rowTrack = data.get(position);
-        //If the album has images, find the smallest image, no smaller than 100px
+
         if(rowTrack.album.images.size() != 0){
-            int sHeight = 0; //Smallest known height
-            int imageID = 0;
-            for(Image img : rowTrack.album.images){
-                if (sHeight == 0 || (img.height < sHeight && img.height >100)){
-                    sHeight = img.height;
-                }
-            }
-            Picasso.with(context).load(rowTrack.album.images.get(imageID).url)
+            Picasso.with(context).load(rowTrack.album.images.get(0).url).error(R.drawable.generic_record)
                     .into(placeHolder.imageview_album);
-            placeHolder.imageview_album.setBackgroundColor(0x00000000);
         } else {
-            placeHolder.imageview_album.setBackgroundColor(0xFFFF0000);
-            placeHolder.imageview_album.setImageResource(android.R.color.transparent);
+            Picasso.with(context).load(R.drawable.generic_record)
+                    .into(placeHolder.imageview_album);
         }
         placeHolder.textview_title.setText(rowTrack.name);
         placeHolder.textview_album.setText(rowTrack.album.name);

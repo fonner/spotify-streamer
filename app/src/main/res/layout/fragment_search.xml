@@ -11,7 +11,9 @@
             android:layout_margin="8dp"
             android:id="@+id/edittext_search_artist"
             android:imeOptions="actionSearch|flagNoExtractUi"
+            android:singleLine="true"
             android:inputType="text"
+
             />
         <GridView
             android:layout_width="match_parent"
@@ -22,6 +24,5 @@
             android:dividerHeight="4dp"
             android:numColumns="2"
             android:verticalSpacing="10dp"
-            android:horizontalSpacing="10dp">
-        </GridView>
+            android:horizontalSpacing="10dp"/>
 </LinearLayout>

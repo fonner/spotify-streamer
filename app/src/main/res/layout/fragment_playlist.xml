@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical"
     tools:context="com.hitechren.spotifystreamer.PlaylistActivityFragment">
 
@@ -9,13 +8,14 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_vertical_margin"
         android:background="#0000f0">
+
         <ImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
-            android:src="@drawable/ic_launcher"
+            android:layout_margin="8dp"
             android:id="@+id/imageview_artist"/>
+
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -24,7 +24,9 @@
             android:textSize="24sp"
             android:gravity="center_vertical"
             android:id="@+id/textview_artist"/>
+
     </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
