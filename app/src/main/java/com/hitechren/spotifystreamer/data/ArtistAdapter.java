@@ -2,6 +2,7 @@ package com.hitechren.spotifystreamer.data;
 
 import android.app.Activity;
 import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,28 +15,25 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import kaaes.spotify.webapi.android.models.Artist;
-import kaaes.spotify.webapi.android.models.Image;
-
-/**
- * Created by benjamin.fonner on 6/29/2015.
- */
-public class ArtistAdapter  extends ArrayAdapter<Artist>{
+public class ArtistAdapter  extends ArrayAdapter<DisplayArtist>{
     Context context;
     int layoutResourceId;
-    ArrayList<Artist> data = null;
+    ArrayList<DisplayArtist> data = null;
 
-    public ArtistAdapter(Context context, int resource, ArrayList<Artist> objects) {
+    public ArtistAdapter(Context context, int resource, ArrayList<DisplayArtist> objects) {
         super(context, resource, objects);
         this.layoutResourceId = resource;
         this.context = context;
         this.data = objects;
     }
 
+    public ArrayList<DisplayArtist> getItems(){
+        return this.data;
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ArtistHolder placeHolder = null;
+        ArtistHolder placeHolder;
 
         if(convertView == null){
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
@@ -51,15 +49,15 @@ public class ArtistAdapter  extends ArrayAdapter<Artist>{
             placeHolder = (ArtistHolder)convertView.getTag();
         }
 
-        Artist rowArtist = data.get(position);
-        if(rowArtist.images.size() != 0){
-            Picasso.with(context).load(rowArtist.images.get(0).url).error(R.drawable.silhouette_person)
+        DisplayArtist rowArtist = data.get(position);
+        if(!rowArtist.artistImageUrl.equals("")){
+            Picasso.with(context).load(rowArtist.artistImageUrl).error(R.drawable.silhouette_person)
                     .into(placeHolder.imageview_artist);
         } else {
             Picasso.with(context).load(R.drawable.silhouette_person)
                     .into(placeHolder.imageview_artist);
         }
-        placeHolder.textview_artist.setText(rowArtist.name);
+        placeHolder.textview_artist.setText(rowArtist.artistName);
 
         return convertView;
     }

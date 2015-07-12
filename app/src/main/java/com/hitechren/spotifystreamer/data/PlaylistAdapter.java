@@ -14,25 +14,27 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import kaaes.spotify.webapi.android.models.Image;
-import kaaes.spotify.webapi.android.models.Track;
 
-public class PlaylistAdapter extends ArrayAdapter<Track> {
+public class PlaylistAdapter extends ArrayAdapter<DisplayTrack> {
 
     Context context;
     int layoutResourceId;
-    ArrayList<Track> data = null;
+    ArrayList<DisplayTrack> data = null;
 
-    public PlaylistAdapter(Context context, int resource, ArrayList<Track> objects) {
+    public PlaylistAdapter(Context context, int resource, ArrayList<DisplayTrack> objects) {
         super(context, resource, objects);
         this.layoutResourceId = resource;
         this.context = context;
         this.data = objects;
     }
+
+    public ArrayList<DisplayTrack> getItems(){
+        return this.data;
+    }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        TrackHolder placeHolder = null;
+        TrackHolder placeHolder;
 
         if(convertView == null){
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
@@ -48,17 +50,17 @@ public class PlaylistAdapter extends ArrayAdapter<Track> {
             placeHolder = (TrackHolder)convertView.getTag();
         }
 
-        Track rowTrack = data.get(position);
+        DisplayTrack rowTrack = data.get(position);
 
-        if(rowTrack.album.images.size() != 0){
-            Picasso.with(context).load(rowTrack.album.images.get(0).url).error(R.drawable.generic_record)
+        if(!rowTrack.albumImageUrl.equals("")){
+            Picasso.with(context).load(rowTrack.albumImageUrl).error(R.drawable.generic_record)
                     .into(placeHolder.imageview_album);
         } else {
             Picasso.with(context).load(R.drawable.generic_record)
                     .into(placeHolder.imageview_album);
         }
-        placeHolder.textview_title.setText(rowTrack.name);
-        placeHolder.textview_album.setText(rowTrack.album.name);
+        placeHolder.textview_title.setText(rowTrack.trackName);
+        placeHolder.textview_album.setText(rowTrack.albumName);
 
         return convertView;
     }
