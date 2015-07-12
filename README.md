@@ -18,6 +18,9 @@ Udacity's "Developing Android Apps" course
 Android Developers Guide
 http://developer.android.com/develop/index.html
 
+Up Button Fix
+http://stackoverflow.com/questions/12276027/how-can-i-return-to-a-parent-activity-correctly
+
 ###Included 3rd Party Modules
 
 Piacasso for Android
