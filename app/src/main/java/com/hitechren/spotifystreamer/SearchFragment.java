@@ -81,7 +81,7 @@ public class SearchFragment extends Fragment {
                     }
                 } else {
                     Toast.makeText(getActivity(),
-                            "Network Unavailable. Try again when connection is ready",
+                            R.string.no_network,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
@@ -124,7 +124,7 @@ public class SearchFragment extends Fragment {
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(),
-                            "Network Unavailable. Try again when connection is ready",
+                            R.string.no_network,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
@@ -151,7 +151,7 @@ public class SearchFragment extends Fragment {
                 }
                 mArtistList = mArtistAdapter.getItems();
             } else {
-                Toast.makeText(getActivity(), "Search returned no results.\nPlease Try again.",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.artist_no_results,Toast.LENGTH_SHORT).show();
             }
         }
     }
