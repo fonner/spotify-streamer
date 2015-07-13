@@ -11,7 +11,7 @@ spotify_icon and ic_launcher from https://en.wikipedia.org/wiki/File:Spotify_Shi
 For ArtistAdapter and PlaylistAdapter's use of setTag and getTag
 http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter
 
-###General Assitance
+###General Assistance
 
 Udacity's "Developing Android Apps" course
 
@@ -20,6 +20,9 @@ http://developer.android.com/develop/index.html
 
 Up Button Fix
 http://stackoverflow.com/questions/12276027/how-can-i-return-to-a-parent-activity-correctly
+
+Network Available check
+http://stackoverflow.com/questions/4238921/detect-whether-there-is-an-internet-connection-available-on-android/4239019#4239019
 
 ###Included 3rd Party Modules
 

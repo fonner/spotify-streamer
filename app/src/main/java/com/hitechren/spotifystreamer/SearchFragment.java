@@ -73,10 +73,19 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = true;
-                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
-                    executeSearch(v.getText().toString());
-                    handled = false;
+                if(Utilities.isNetworkAvailable(getActivity())){
+                    if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER))
+                            || (actionId == EditorInfo.IME_ACTION_SEARCH)) {
+                        executeSearch(v.getText().toString());
+                        handled = false;
+                    }
+                } else {
+                    Toast.makeText(getActivity(),
+                            "Network Unavailable. Try again when connection is ready",
+                            Toast.LENGTH_SHORT)
+                            .show();
                 }
+
                 return handled;
             }
         });
@@ -107,11 +116,18 @@ public class SearchFragment extends Fragment {
         GridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DisplayArtist artist = mArtistAdapter.getItem(position);
+                if(Utilities.isNetworkAvailable(getActivity())){
+                    DisplayArtist artist = mArtistAdapter.getItem(position);
 
-                Intent intent = new Intent(getActivity(), PlaylistActivity.class)
-                        .putExtra("displayArtist", artist);
-                startActivity(intent);
+                    Intent intent = new Intent(getActivity(), PlaylistActivity.class)
+                            .putExtra("displayArtist", artist);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(),
+                            "Network Unavailable. Try again when connection is ready",
+                            Toast.LENGTH_SHORT)
+                            .show();
+                }
             }
         });
         return rootView;
