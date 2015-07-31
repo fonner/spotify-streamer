@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,7 +80,7 @@ public class SearchFragment extends Fragment {
                     }
                 } else {
                     Toast.makeText(getActivity(),
-                            R.string.no_network,
+                            R.string.notification_no_network,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
@@ -124,7 +123,7 @@ public class SearchFragment extends Fragment {
                     startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(),
-                            R.string.no_network,
+                            R.string.notification_no_network,
                             Toast.LENGTH_SHORT)
                             .show();
                 }
@@ -151,7 +150,7 @@ public class SearchFragment extends Fragment {
                 }
                 mArtistList = mArtistAdapter.getItems();
             } else {
-                Toast.makeText(getActivity(), R.string.artist_no_results,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.notification_artist_no_results,Toast.LENGTH_SHORT).show();
             }
         }
     }
